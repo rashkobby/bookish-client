@@ -1,6 +1,8 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import Calendar from './Calender'
 import Sidebar from './Sidebar'
+import Usermgt from './Usermgt'
 
 const Dashboard = () => {
   return (
@@ -9,8 +11,9 @@ const Dashboard = () => {
             <Sidebar/>
         </div>
         <div className=" w-screen  flex-1 p-6 " >
-            <Calendar/>
-      </div>
+          <Outlet />
+
+        </div>
     </div>
   )
 }

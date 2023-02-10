@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Calendar from "./Calender";
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
-    { title: "Dashboard", path: "/dashboard", src: "Chart_fill" },
-    { title: "Inbox", src: "Chat" },
-    { title: "Accounts", src: "User", gap: true },
+    { title: "Dashboard", src: "Chart_fill" , path: "" },
+    { title: "Inbox", src: "Chat" , path: "/Calender" },
+    { title: "Accounts",  src: "User", gap: true, path: "/Usermgt"  },
     { title: "Schedule ", src: "Calendar" },
     { title: "Search", src: "Search" },
     { title: "Analytics", src: "Chart" },
@@ -52,10 +52,11 @@ const Sidebar = () => {
               } `}
             >
               <img src={`./src/assets/${Menu.src}.png`} />
-              <Link to={Menu.path} className={`${!open && "hidden"} origin-left duration-200`}>
+              <Link to={`/Dashboard${Menu.path}`} className={`${!open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
               </Link>
             </li>
+            
           ))}
         </ul>
       </div>   
