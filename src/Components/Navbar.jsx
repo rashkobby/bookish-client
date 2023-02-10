@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between px-4 py-3 bg-gray-800">
+    <nav className="flex items-center justify-between mb-4 px-4 py-3 bg-gray-800 z-10" style={{ position: "fixed", top: 0, width: "100%" }}>
       <div className="flex items-center">
         <Link to="/" className="text-white mx-5 font-medium text-xl">
           Your Logo
@@ -15,7 +15,7 @@ const Navbar = () => {
       </div>
       <div className="block lg:hidden">
         <button
-          className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+          className="flex items-center px-3 py-2 border rounded text-Gray-600 bg-gray-800 border-gray-800 hover:text-gray-800 hover:border-white"
           onClick={() => setOpen(!isOpen)}
         >
           <FaBars className="w-6 h-6" />
@@ -46,17 +46,18 @@ const Navbar = () => {
             Contact
           </Link>
         </div>
+
         {!isLoggedIn ? (
           <div className="flex">
             <Link
               to="/Login"
-              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0 mr-2"
+              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-gray-400 hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0 mr-2"
             >
               Login
             </Link>
             <Link
               to="/Signup"
-              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-gray-400 hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0"
             >
               Sign Up
             </Link>

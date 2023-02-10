@@ -5,7 +5,7 @@ import '../App.css'
 
 const Header = ({ signedIn }) => {
   return (
-    <header className="bg-white border-b p-4">
+    <header className="bg-white border-b p-4 fixed">
       <nav className="flex items-center justify-between">
         <Link to="/" className="font-medium text-lg text-blue-600">
           App Name

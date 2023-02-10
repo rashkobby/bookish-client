@@ -11,7 +11,7 @@ const Signup = () => {
 
     // perform sign-up logic here (e.g. sending data to a server)
     // ...
-
+        
     // reset the form fields
     
     setEmail('');

@@ -1,9 +1,10 @@
 import { useState } from "react";
-const Sidebar 
-= () => {
+import { Link } from "react-router-dom";
+import Calendar from "./Calender";
+const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
-    { title: "Dashboard", src: "Chart_fill" },
+    { title: "Dashboard", path: "/dashboard", src: "Chart_fill" },
     { title: "Inbox", src: "Chat" },
     { title: "Accounts", src: "User", gap: true },
     { title: "Schedule ", src: "Calendar" },
@@ -14,11 +15,11 @@ const Sidebar
   ];
 
   return (
-    <div className="flex">
+    <div>
       <div
         className={` ${
           open ? "w-72" : "w-20 "
-        } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
+        } bg-gray-800 h-screen p-5 pt-8 relative duration-300` }
       >
         <img
           src="./src/assets/control.png"
@@ -38,7 +39,7 @@ const Sidebar
               !open && "scale-0"
             }`}
           >
-            Designer
+            My name
           </h1>
         </div>
         <ul className="pt-6">
@@ -51,16 +52,13 @@ const Sidebar
               } `}
             >
               <img src={`./src/assets/${Menu.src}.png`} />
-              <span className={`${!open && "hidden"} origin-left duration-200`}>
+              <Link to={Menu.path} className={`${!open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
-              </span>
+              </Link>
             </li>
           ))}
         </ul>
-      </div>
-      <div className="h-screen flex-1 p-7">
-        <h1 className="text-2xl font-semibold ">Home Page</h1>
-      </div>
+      </div>   
     </div>
   );
 };

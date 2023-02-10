@@ -12,11 +12,11 @@ const Calendar = () => {
   ]);
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="px-4 py-6 bg-white border-b border-gray-200">
-        <h2 className="text-3xl font-medium text-gray-800">{selectedDate.toLocaleDateString()}</h2>
+    <div className="flex flex-col h-full">
+      <div className="px-4 py-6 mt-6 border-b border-gray-700">
+        <h2 className="text-3xl font-medium ">{selectedDate.toLocaleDateString()}</h2>
       </div>
-      <div className="flex-1 p-4 overflow-y-scroll">
+      <div className="flex-1 p-4 ">
         {appointments.map((appointment, index) => (
           <Appointment key={index} time={appointment.time} location={appointment.location} description={appointment.description} />
         ))}
