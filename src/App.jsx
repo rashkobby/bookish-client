@@ -1,5 +1,5 @@
 import './App.css'
-import React from "react";
+import {React} from "react";
 import { Routes, Route, Router } from "react-router-dom";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
@@ -9,8 +9,10 @@ import Sidebar from "./Components/Sidebar"
 import Dashboard from './Components/Dashboard';
 import Calendar from './Components/Calender';
 import Usermgt from './Components/Usermgt';
+import Receipts from './Components/Receipts';
 
 const App = () => {
+
   return (
     <div className="app bg-white">
       <Navbar/>
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/Dashboard/*" element={< Dashboard />}>
           <Route path="Calender" element={<Calendar />} />
           <Route path="Usermgt" element={<Usermgt />} />
+          <Route path="Receipts" element={<Receipts />} />
         </Route>     
       </Routes>
 
