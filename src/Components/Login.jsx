@@ -1,51 +1,77 @@
 import React, { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import  useFetch  from '../Utils/useFetch';
+import { FaSignInAlt } from 'react-icons/fa';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const {data: userInfo, isLoading, error} = useFetch('https://jsonplaceholder.typicode.com/posts')
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // perform authentication here
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { response, error } = useFetch(`/`, {
+  
+    body: JSON.stringify({ email, password }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { status } = await response();
+    if (status === 200) {
+      setIsLoggedIn(true);
+    }
   };
 
+  if (isLoggedIn) {
+    return <Navigate to='/dashboard' />;
+  }
+
   return (
-    <div className="w-full max-w-sm mx-auto mt-10">
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
-            Username
+    <div className='bg-gray-800 min-h-screen flex items-center justify-center'>
+      <form
+        className='bg-white p-6 rounded-lg shadow-md'
+        onSubmit={handleSubmit}
+      >
+        <h1 className='text-lg font-medium mb-2'>Login</h1>
+        <div className='mb-4'>
+          <label
+            className='block font-medium mb-2 text-gray-700'
+            htmlFor='email'
+          >
+            Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            type='email'
+            id='email'
+            name='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className='w-full border border-gray-400 p-2'
           />
         </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
+        <div className='mb-4'>
+          <label
+            className='block font-medium mb-2 text-gray-700'
+            htmlFor='password'
+          >
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="Password"
+            type='password'
+            id='password'
+            name='password'
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
+            className='w-full border border-gray-400 p-2'
           />
         </div>
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Sign In
-          </button>
-        </div>
+        <button className='bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600'>
+          <FaSignInAlt className='mr-2' />
+          Login
+        </button>
+        {/* {error && <p className='text-red-500'>{error}</p>} */}
       </form>
     </div>
   );
