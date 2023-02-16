@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { FaBars, FaUser } from "react-icons/fa";
+import { AuthContext } from "../utils/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <nav className="flex items-center justify-between mb-4 px-4 py-3 bg-gray-800 z-10" style={{ position: "fixed", top: 0, width: "100%" }}>
+    <nav
+      className="flex items-center justify-between mb-4 px-4 py-3 bg-gray-800 z-10"
+      style={{ position: "fixed", top: 0, width: "100%" }}
+    >
       <div className="flex items-center">
         <Link to="/" className="text-white mx-5 font-medium text-xl">
           Your Logo
@@ -71,6 +75,5 @@ const Navbar = () => {
     </nav>
   );
 };
-
 
 export default Navbar;

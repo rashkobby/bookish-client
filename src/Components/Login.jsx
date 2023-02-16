@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import  useFetch  from '../Utils/useFetch';
 import { FaSignInAlt } from 'react-icons/fa';
+import Axios from 'axios'
 
 const Login = () => {
   // const {data: userInfo, isLoading, error} = useFetch('https://jsonplaceholder.typicode.com/posts')
@@ -11,7 +12,6 @@ const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { response, error } = useFetch(`/`, {
-  
     body: JSON.stringify({ email, password }),
     headers: { 'Content-Type': 'application/json' },
   });
@@ -24,9 +24,12 @@ const Login = () => {
     }
   };
 
-  if (isLoggedIn) {
-    return <Navigate to='/dashboard' />;
+  const navigate = useNavigate()
+  //Requesting on http://localhost:6000/auth/google once user click on sign in with google
+  const signInWithGoogle = () => {
+    window.open("http://localhost:5500/auth/google", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
   }
+  
 
   return (
     <div className='bg-gray-800 min-h-screen flex items-center justify-center'>
@@ -73,6 +76,8 @@ const Login = () => {
         </button>
         {/* {error && <p className='text-red-500'>{error}</p>} */}
       </form>
+
+      <button onClick={signInWithGoogle} className='bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600'>sign with google</button>
     </div>
   );
 };
