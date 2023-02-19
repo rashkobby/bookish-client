@@ -14,6 +14,7 @@ import AuthProvider from './utils/AuthContext';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [User, setUser] = useState()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -23,18 +24,24 @@ const App = () => {
       .then((res) => {
         if (res.status === 200) {
           setIsLoggedIn(true);
-          // navigate('/dashboard')
+          return res.json();
         } else {
           setIsLoggedIn(false);
+          throw new Error('Failed to fetch user data');
         }
       })
-      .catch((err) => console.log(err));
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-
+  console.log(User)
   return (
     <div className="app bg-white">
       
-      <AuthProvider value={{ isLoggedIn }}>
+      <AuthProvider value={{ isLoggedIn, User }}>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -44,7 +51,7 @@ const App = () => {
           <Route
             path="/Dashboard/*"
             element={
-              !isLoggedIn ? (
+              isLoggedIn ? (
                 <Dashboard />
               ) : (
                 <Navigate to="/" replace />
@@ -62,3 +69,4 @@ const App = () => {
 };
 
 export default App;
+
